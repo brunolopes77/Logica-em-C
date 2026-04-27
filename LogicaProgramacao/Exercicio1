@@ -42,12 +42,11 @@ void traco(int m3[4][4]) {
 }
 
 void somaAcimaDiagonal(int m4[4][4]){
-    int i = 0, j = 0, aux = 0;
+    int i, j; 
     int soma = 0;
 
     for (i = 0; i < 4; i++) {
-        aux += 1;
-        for (j = aux; j < 4; j++) {
+        for (j = i + 1; j < 4; j++) {
         soma += m4[i][j];
         }
     }
