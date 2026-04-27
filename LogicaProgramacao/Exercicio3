@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+void leMatriz(int a[3][3], int b[3][3]){
+    int i, j;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            printf("Digite um numero para sua primeria matriz: \n");
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            printf("Digite um numero para sua segunda matriz: \n");
+            scanf("%d", &b[i][j]);
+        }
+    }
+
+}
+
+void subtraiMatriz(int a[3][3], int b[3][3], int diferenca[3][3]){
+    int i, j;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            diferenca[i][j] = a[i][j] - b[i][j];
+        }
+    }
+}
+
+void transposta(int diferenca[3][3]){
+    
+
+}
+
+int main(){
+    int matrizA[3][3];
+    int matrizB[3][3];
+    int matrizDiferença[3][3];
+    leMatriz(matrizA, matrizB);
+    subtraiMatriz(matrizA, matrizB, matrizDiferença);
+    transposta(matrizDiferença);
+
+    return 0;
+}
