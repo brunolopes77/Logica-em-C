@@ -71,8 +71,8 @@ int main(){
 
     leMatriz(matrizA, matrizB);
     subtraiMatriz(matrizA, matrizB, matrizDiferenca);
-    transposta(matrizDiferença, matrizTransposta);
-    imprimeMatriz(matrizDiferença, matrizTransposta);
+    transposta(matrizDiferenca, matrizTransposta);
+    imprimeMatriz(matrizDiferenca, matrizTransposta);
     
     return 0;
 }
