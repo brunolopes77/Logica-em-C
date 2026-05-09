@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int imprimirMenu() {
 	int opcao;
@@ -40,20 +41,180 @@ void cadastrarLivro() {
 		return;
 	}
 
+	printf("Digite um codigo para seu livro: ");
+	fgets(codigo, 1000, stdin);
+
 	printf("Titulo: ");
 	fgets(titulo, 1000, stdin);
-	fprintf(arquivo, "Titulo: %s", titulo);
 
 	printf("Autor: ");
 	fgets(autor, 1000 , stdin);
-	fprintf(arquivo, "Autor: %s", autor);
 
-	printf("Digite um codigo para seu livro:");
-	fgets(codigo, 1000, stdin);
-	fprintf(arquivo, "codigo do livro: %s\n", codigo);
-	
+	fprintf(arquivo, "Codigo: %s", codigo);
+	fprintf(arquivo, "Titulo: %s", titulo);
+	fprintf(arquivo, "Autor: %s\n", autor);
+
 	fclose(arquivo);
+}
 
+void consultarLivro() {
+	char busca[1000];
+	char linha[1000];
+	int encontrado = 0;
+
+	FILE *arquivo = fopen("dados.txt", "r");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir o arquivo.\n");
+		return;
+	}
+
+	printf("Digite o codigo do livro que deseja buscar: ");
+	fgets(busca, 1000, stdin);
+
+	
+	busca[strcspn(busca, "\n")] = '\0';
+
+	while (fgets(linha, 1000, arquivo) != NULL) {
+
+		if (strstr(linha, busca) != NULL) {
+
+			printf("\n=== LIVRO ENCONTRADO ===\n");
+			
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			encontrado = 1;
+			break;
+		}
+	}
+
+	if (!encontrado) {
+		printf("Livro nao encontrado.\n");
+	}
+
+	fclose(arquivo);
+}
+
+
+void emprestarLivro() {
+
+	char busca[1000];
+	char linha[1000];
+
+	FILE *arquivo = fopen("dados.txt", "r");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir arquivo.\n");
+		return;
+	}
+
+	printf("Digite o codigo do livro: ");
+	fgets(busca, 1000, stdin);
+
+	busca[strcspn(busca, "\n")] = '\0';
+
+	int encontrado = 0;
+
+	while (fgets(linha, 1000, arquivo) != NULL) {
+
+		if (strstr(linha, busca) != NULL) {
+
+			encontrado = 1;
+
+			printf("\nLivro encontrado:\n");
+
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			printf("Livro emprestado com sucesso!\n");
+
+			break;
+		}
+	}
+
+	if (!encontrado) {
+		printf("Livro nao encontrado.\n");
+	}
+
+	fclose(arquivo);
+}
+
+void devolverLivro() {
+
+	char busca[1000];
+	char linha[1000];
+
+	FILE *arquivo = fopen("dados.txt", "r");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir arquivo.\n");
+		return;
+	}
+
+	printf("Digite o codigo do livro: ");
+	fgets(busca, 1000, stdin);
+
+	busca[strcspn(busca, "\n")] = '\0';
+
+	int encontrado = 0;
+
+	while (fgets(linha, 1000, arquivo) != NULL) {
+
+		if (strstr(linha, busca) != NULL) {
+
+			encontrado = 1;
+
+			printf("\nLivro encontrado:\n");
+
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			fgets(linha, 1000, arquivo);
+			printf("%s", linha);
+
+			printf("Livro devolvido com sucesso!\n");
+
+			break;
+		}
+	}
+
+	if (!encontrado) {
+		printf("Livro nao encontrado.\n");
+	}
+
+	fclose(arquivo);
+}
+
+void listarLivros() {
+	char linha[1000];
+
+	FILE *arquivo = fopen("dados.txt", "r");
+
+	if (arquivo == NULL) {
+		printf("Erro ao abrir o arquivo.\n");
+		return;
+	}
+
+	printf("\n===== LISTA DE LIVROS =====\n\n");
+
+	while (fgets(linha, 1000, arquivo) != NULL) {
+		printf("%s", linha);
+	}
+
+	fclose(arquivo);
 }
 
 int main() {
@@ -68,9 +229,23 @@ int main() {
                 cadastrarLivro();
 				break;
 			case 2:
+				consultarLivro();
+				break;
+			case 3:
+				emprestarLivro();
+				break;
+			case 4:
+				devolverLivro();
+				break;
+			case 5:
+				listarLivros();
+				break;
+			default:
+				printf("Opcao inexistente.");
 				break;
 		}
 	} while (opcao != 0);
 
+	
 	return 0;
 }

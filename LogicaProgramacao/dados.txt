@@ -1,9 +1,10 @@
 
-Titulo: os matematicos
+Titulo: enegnharia
 Autor: bruno
 codigo do livro: 00
 
-Titulo: enegenharia
-Autor: mateus
-codigo do livro: 01
+Titulo: matematica
+Autor: lopes
+codigo do livro: 02
 
+Titulo: "C:\Users\jdaco\VscodeProjects\Logica em C\LogicaProgramacao\Avaliacao2.exe"
